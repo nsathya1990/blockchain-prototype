@@ -78,6 +78,9 @@ Blockchain.prototype.chainIsValid = function (blockchain) {
             // chain not valid
             validChain = false;
         }
+
+        console.log('previousBlockHash => ', prevBlock['hash']);
+        console.log('currentBlockHash => ', currentBlock['hash']);
     };
 
     const genesisBlock = blockchain[0];
