@@ -223,7 +223,22 @@ app.get('/block/:blockHash', function (req, res) {
 });
 
 app.get('/transaction/:transactionId', function (req, res) {
+    let correctTransaction = null;
+    let correctBlock = null;
 
+    this.chain.forEach(block => {
+        block.transactions.forEach(transaction => {
+            if (transaction.transactionId === transactionId) {
+                correctTransaction = transaction;
+                correctBlock = block;
+            }
+        });
+    });
+
+    return {
+        transaction: correctTransaction,
+        block: correctBlock
+    };
 });
 
 app.get('/address/:address', function (req, res) {
