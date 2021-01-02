@@ -197,7 +197,7 @@ app.get('/consensus', function (req, res) {
             });
             // if there is no new longest chain (meaning that the current chain is longest) (or)
             // if there is a new longest chain, but that new chain is not valid
-            if (!newLongestChain || (newLongestChain && !bitcoin.chainIsValid())) {
+            if (!newLongestChain || (newLongestChain && !bitcoin.chainIsValid(newLongestChain))) {
                 res.json({
                     note: 'Current chain has not been replaced.',
                     chain: bitcoin.chain
@@ -213,6 +213,19 @@ app.get('/consensus', function (req, res) {
             }
         });
 });
+
+app.get('/block/:blockHash', function(req, res) {
+
+});
+
+app.get('/transaction/:transactionId', function(req, res) {
+
+});
+
+app.get('/address/:address', function(req, res) {
+
+});
+
 
 app.listen(port, function () {
     console.log(`Listening on port ${port}...`);
