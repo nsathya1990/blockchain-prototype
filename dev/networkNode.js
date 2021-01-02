@@ -223,26 +223,15 @@ app.get('/block/:blockHash', function (req, res) {
 });
 
 app.get('/transaction/:transactionId', function (req, res) {
-    let correctTransaction = null;
-    let correctBlock = null;
-
-    this.chain.forEach(block => {
-        block.transactions.forEach(transaction => {
-            if (transaction.transactionId === transactionId) {
-                correctTransaction = transaction;
-                correctBlock = block;
-            }
-        });
+    const transactionId = req.params.transactionId;
+    const transactionData = bitcoin.getTransaction(transactionId);
+    res.json({
+        transaction: transactionData.transaction,
+        block: transactionData.block
     });
-
-    return {
-        transaction: correctTransaction,
-        block: correctBlock
-    };
 });
 
 app.get('/address/:address', function (req, res) {
-
 });
 
 
